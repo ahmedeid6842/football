@@ -1,0 +1,99 @@
+<% let numberOfTrue = 0 %>
+<% for(let i=0;i<chat.length;i++){ 
+        if(chat[i].body.isRead===false&&chat[i].body.senderName!==data.username){
+            numberOfTrue++;
+        }
+} %>
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="fa fa-globe "></span> <b class="caret"></b>
+    <% if(numberOfTrue!==0){ %>
+    <span class="label label-primary nav-label-icon" id=""><%= numberOfTrue%></span>
+    <% }else{ %>
+    <span class="label label-primary nav-label-icon" id=""></span>
+    <% } %>
+</a>
+<ul class="dropdown-menu dmenu">
+    <li>
+        <div class="navbar-login">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="dropdown-tag">
+                        <h3 class="text-center dropdown-tag-head">
+                            Notifications
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <% if(chat.length>0){ %>
+                <% _.forEach(chat,(val)=>{%>
+                <% if(user.username!==val.body.senderName){ %>
+                <a data-value="<%= val.body._id%>" id="messageLink"
+                    href="/chat/<%= _.lowerCase(val.body.senderName).replace(/ /g,"-") %>.<%= _.lowerCase(user.username).replace(/ /g,"-") %>">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p class="text-center">
+                                <img src="<%= val.body.sender.userImage %>"
+                                    class="img-circle img-responsive dropdown-img" alt="">
+                            </p>
+                        </div>
+                        <div class="col-md-9 pleft-0">
+                            <div class="row">
+                                <div class="col-md-12 textRow">
+                                    <div class="col-md-12" id="textRow">
+                                        <p class="text-left drop-name">
+                                            <%if(val.body.receiverName!==data.username){%>
+                                            <strong><%= val.body.receiverName %> </strong>
+                                            <%}else{%>
+                                            <strong><%= val.body.senderName %> </strong>
+                                            <%}%>
+                                        </p>
+                                        <input type="hidden" name="chatId" id="chatId" value="<%= val.body._id %> ">
+                                            <%= val.body.message %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <% }else if(user.username ===val.body.senderName){ %>
+                <a data-value="<%= val.body._id%>" id="messageLink"
+                    href="/chat/<%= _.lowerCase(val.body.receiverName).replace(/ /g,"-") %>.<%= user.username.replace(/ /g,"-") %>">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p class="text-center">
+                                <img src="<%= val.body.receiver.userImage %>"
+                                    class="img-circle img-responsive dropdown-img" />
+                            </p>
+                        </div>
+                        <div class="col-md-9 pleft-0">
+                            <div class="row">
+                                <div class="col-md-12 textRow">
+                                    <div class="col-md-12" id="textRow">
+                                        <p class="text-left drop-name">
+                                            <%if(val.body.receiverName!==data.username){%>
+                                            <strong><%= val.body.receiverName %> </strong>
+                                            <%}else{%>
+                                            <strong><%= val.body.senderName %> </strong>
+                                            <%}%>
+                                            </p>
+                                            <input type="hidden" name="chatId" id="chatId" value="<%= val.body._id %>">
+
+
+                                            <%= val.body.message %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <hr class="dropdown-divider" />
+                <% } %>
+                <% })%>
+                <% } %>
+            </div>
+        </div>
+    </li>
+
+</ul>

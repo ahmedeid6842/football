@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     userImage: {
         type: String,
-        default: 'default.png'
+        default: 'https://res.cloudinary.com/dj2yju5sd/image/upload/v1598091690/unknown-512_wvydzh.png'
     },
     facebook: {
         type: String,

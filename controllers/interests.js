@@ -1,5 +1,3 @@
-
-
 const User = require('../models/user');
 const Message = require('../models/message');
 const cloudinary = require('../middleware/cloudinary');
@@ -74,7 +72,6 @@ module.exports.postInterest = async (req, res) => {
                 }
             }
         })
-
 
     } if (req.body.senderId) {
         await User.update({

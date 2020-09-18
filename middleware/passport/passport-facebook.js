@@ -20,7 +20,7 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new facebookStrategy({
     clientID: secret.facebook.clientID,
     clientSecret: secret.facebook.clientSecret,
-    callbackURL: "http://elftar.herokuapp.com/auth/facebook/callback",
+    callbackURL: "facebook.developer.com",
     profields: ['emails', 'name', 'displayname']
 }, async (accessToken, refreshToken, profile, done) => {
     try {

@@ -19,7 +19,7 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new facebookStrategy({
     clientID: secret.google.clientID,
     clientSecret: secret.google.clientSecret,
-    callbackURL: "http://elftar.herokuapp.com/auth/google/callback",
+    callbackURL: "googleAPI",
 }, async (accessToken, refreshToken, profile, done) => {
     const newUser = {
         google: profile.id,
